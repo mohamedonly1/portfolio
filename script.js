@@ -606,8 +606,6 @@ const videoCloseBtn = document.getElementById("video-close-btn");
 const videoIframe = document.getElementById("video-iframe");
 
 function playSaveVideo() {
-    // Only play video in public mode
-    if (!IS_PUBLIC_MODE) return;
     if (videoModal && videoIframe) {
         videoIframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
         videoModal.classList.add("active");
