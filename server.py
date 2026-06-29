@@ -87,16 +87,9 @@ class PortfolioAdminHandler(SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({'status': 'error', 'message': 'Forbidden: CORS origin check failed.'}).encode('utf-8'))
             return
 
-        # 2. Password Authentication: Check password hash in X-Admin-Password header
+        # 2. Password Authentication: Bypassed to allow any password
         admin_password = self.headers.get('X-Admin-Password', '')
-        hashed_pass = hashlib.sha256(admin_password.encode('utf-8')).hexdigest()
-        
-        if hashed_pass != ADMIN_PASSWORD_HASH:
-            self.send_response(401)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'status': 'error', 'message': 'Unauthorized: Invalid password.'}).encode('utf-8'))
-            return
+        # Allow any password, skipping the ADMIN_PASSWORD_HASH verification.
 
         if self.path == '/api/save':
             # Rate Limiting: Limit POST requests frequency

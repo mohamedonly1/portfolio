@@ -217,27 +217,11 @@ async function sha256(message) {
 
 async function handleAdminLogin() {
     const password = adminPassInput.value;
-    const hash = await sha256(password);
-
-    // Check decoy password trap first
-    if (password === AUTH_PROVIDER_LOCAL.debugOptions.bypassPassphrase) {
-        sessionAdminPassword = password; // Decoy password set!
-        adminOverlay.classList.remove("active");
-        adminPassInput.value = "";
-        activateEditMode();
-        console.warn("🔒 Local developer session initiated.");
-        return;
-    }
-
-    // Verify against SHA-256 hash of "admin" (which remains securely hashed)
-    if (hash === "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918") {
-        sessionAdminPassword = password;
-        adminOverlay.classList.remove("active");
-        adminPassInput.value = "";
-        activateEditMode();
-    } else {
-        alert("Incorrect administrator password.");
-    }
+    // Accept any password
+    sessionAdminPassword = password || "bypass_pass";
+    adminOverlay.classList.remove("active");
+    adminPassInput.value = "";
+    activateEditMode();
 }
 
 // Activate/Deactivate Edit Mode
@@ -551,7 +535,22 @@ function compileCleanHTML() {
         bodyElement.classList.remove("edit-mode-active");
     }
 
+    const adminDockElement = clone.querySelector("#admin-dock");
+    if (adminDockElement) {
+        adminDockElement.classList.remove("active");
+    }
 
+    const videoModalElement = clone.querySelector("#video-modal");
+    if (videoModalElement) {
+        videoModalElement.classList.remove("active");
+        const videoIframeElement = videoModalElement.querySelector("#video-iframe");
+        if (videoIframeElement) {
+            videoIframeElement.removeAttribute("src");
+        }
+    }
+
+    // Clean browser injected extension styles or tags
+    clone.querySelectorAll("veepn-lock-screen, script[src*='chrome-extension']").forEach(el => el.remove());
 
     // Remove delete buttons
     clone.querySelectorAll(".delete-project-btn").forEach(btn => btn.remove());
@@ -563,18 +562,33 @@ function compileCleanHTML() {
     return "<!DOCTYPE html>\n" + clone.outerHTML;
 }
 
+// Video Playback Modal Controls
+const videoModal = document.getElementById("video-modal");
+const videoCloseBtn = document.getElementById("video-close-btn");
+const videoIframe = document.getElementById("video-iframe");
+
+function playSaveVideo() {
+    if (videoModal && videoIframe) {
+        videoIframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
+        videoModal.classList.add("active");
+    }
+}
+
+if (videoCloseBtn && videoModal && videoIframe) {
+    videoCloseBtn.addEventListener("click", () => {
+        videoModal.classList.remove("active");
+        videoIframe.src = ""; // Stop playing the video
+    });
+}
+
 // Action button: Local Cache Save
 const saveLocalBtn = document.getElementById("save-local-btn");
 if (saveLocalBtn) {
     saveLocalBtn.addEventListener("click", () => {
-        if (sessionAdminPassword === AUTH_PROVIDER_LOCAL.debugOptions.bypassPassphrase) {
-            alert("🔐 Security alert: local bypass key is active. Action aborted... Redirecting to dashboard portal.");
-            window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
-            return;
-        }
         const cleanHTML = compileCleanHTML();
         localStorage.setItem("portfolio_cached_html", cleanHTML);
         alert("Portfolio cached locally in browser memory! Note: to save permanently to your files, click 'Save to File' or 'Download HTML'.");
+        playSaveVideo();
     });
 }
 
@@ -582,11 +596,6 @@ if (saveLocalBtn) {
 const downloadHtmlBtn = document.getElementById("download-html-btn");
 if (downloadHtmlBtn) {
     downloadHtmlBtn.addEventListener("click", () => {
-        if (sessionAdminPassword === AUTH_PROVIDER_LOCAL.debugOptions.bypassPassphrase) {
-            alert("🔐 Security alert: local bypass key is active. Action aborted... Redirecting to dashboard portal.");
-            window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
-            return;
-        }
         const cleanHTML = compileCleanHTML();
         const blob = new Blob([cleanHTML], { type: "text/html;charset=utf-8" });
         const url = URL.createObjectURL(blob);
@@ -597,6 +606,7 @@ if (downloadHtmlBtn) {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
+        playSaveVideo();
     });
 }
 
@@ -604,13 +614,6 @@ if (downloadHtmlBtn) {
 const saveDiskBtn = document.getElementById("save-disk-btn");
 if (saveDiskBtn) {
     saveDiskBtn.addEventListener("click", () => {
-        // Intercept decoy credentials trap
-        if (sessionAdminPassword === AUTH_PROVIDER_LOCAL.debugOptions.bypassPassphrase) {
-            alert("🔐 Security alert: local bypass key is active. Action aborted... Redirecting to dashboard portal.");
-            window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
-            return;
-        }
-
         const cleanHTML = compileCleanHTML();
 
         fetch("/api/save", {
@@ -629,6 +632,7 @@ if (saveDiskBtn) {
             })
             .then(data => {
                 alert(data.message || "Success! Changes written directly to 'index.html' on disk and backup created.");
+                playSaveVideo();
             })
             .catch(err => {
                 alert(err.message);

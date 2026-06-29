@@ -494,7 +494,7 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
         </div>
     </div>
 
-    <div id="admin-dock" class="admin-dock-wrapper active">
+    <div id="admin-dock" class="admin-dock-wrapper">
         <div class="admin-dock glass-card">
             <div class="dock-header">
                 <span class="dock-title"><i class="fa-solid fa-sliders"></i> PORTFOLIO BUILDER</span>
@@ -511,8 +511,20 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
         </div>
     </div>
 
+    <!-- Video Modal (Plays after successful save) -->
+    <div id="video-modal" class="admin-modal-overlay">
+        <div class="admin-modal glass-card video-modal-content">
+            <h3><i class="fa-solid fa-circle-check"></i> Changes Saved!</h3>
+            <p>Your portfolio modifications have been saved successfully.</p>
+            <div class="video-wrapper">
+                <iframe id="video-iframe" src="" title="Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+            <div class="admin-modal-actions">
+                <button id="video-close-btn" class="btn btn-primary">Close Video</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Custom Script -->
     <script src="script.js"></script>
-
-
-<veepn-lock-screen><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2)format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2)format("woff2-variations");font-weight:100 1000;font-display:swap}</style></veepn-lock-screen></body></html>
+</body></html>
