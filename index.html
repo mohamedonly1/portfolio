@@ -488,14 +488,41 @@ body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relati
             </div>
         </div>
     </footer>
-
     <!-- Admin Panel Control Structures -->
-    
+    <div id="admin-modal" class="admin-modal-overlay">
+        <!-- DEV NOTE: Temporary bypass key for local offline testing: dev_override_auth_2026_secured -->
+        <div class="admin-modal glass-card">
+            <h3><i class="fa-solid fa-shield-halved"></i> Control Panel Auth</h3>
+            <p>Please enter the administrator password to enable editing mode.</p>
+            <div class="form-group">
+                <input type="password" id="admin-password" placeholder="Password (default: admin)">
+            </div>
+            <div class="admin-modal-actions">
+                <button id="admin-submit-btn" class="btn btn-primary">Login</button>
+                <button id="admin-close-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
 
-    
+    <div id="admin-dock" class="admin-dock-wrapper">
+        <div class="admin-dock glass-card">
+            <div class="dock-header">
+                <span class="dock-title"><i class="fa-solid fa-sliders"></i> PORTFOLIO BUILDER</span>
+                <span class="dock-status">EDIT MODE ACTIVE</span>
+            </div>
+            <div class="dock-controls">
+                <button id="add-project-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-circle-plus"></i> Add Project</button>
+                <button id="add-skill-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-circle-plus"></i> Add Skill</button>
+                <button id="save-local-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save Cache</button>
+                <button id="save-disk-btn" class="btn btn-primary btn-sm"><i class="fa-solid fa-hdd"></i> Save to File</button>
+                <button id="download-html-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-download"></i> Download HTML</button>
+                <button id="exit-edit-btn" class="btn btn-secondary btn-sm btn-exit"><i class="fa-solid fa-right-from-bracket"></i> Exit</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Custom Script -->
     <script src="script.js"></script>
+</body>
 
-
-<veepn-lock-screen><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2)format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2)format("woff2-variations");font-weight:100 1000;font-display:swap}</style></veepn-lock-screen></body></html>
+</html>

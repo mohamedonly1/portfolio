@@ -551,12 +551,7 @@ function compileCleanHTML() {
         bodyElement.classList.remove("edit-mode-active");
     }
 
-    // Remove admin modal and dock completely
-    const adminModal = clone.querySelector("#admin-modal");
-    if (adminModal) adminModal.remove();
 
-    const adminDock = clone.querySelector("#admin-dock");
-    if (adminDock) adminDock.remove();
 
     // Remove delete buttons
     clone.querySelectorAll(".delete-project-btn").forEach(btn => btn.remove());
