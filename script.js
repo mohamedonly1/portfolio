@@ -654,6 +654,12 @@ if (downloadHtmlBtn) {
 const saveDiskBtn = document.getElementById("save-disk-btn");
 if (saveDiskBtn) {
     saveDiskBtn.addEventListener("click", () => {
+        // Public/GitHub mode: no server available — play video directly
+        if (IS_PUBLIC_MODE) {
+            playSaveVideo();
+            return;
+        }
+
         const cleanHTML = compileCleanHTML();
 
         fetch("/api/save", {
