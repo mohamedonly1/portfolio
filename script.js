@@ -208,12 +208,6 @@ const AUTH_PROVIDER_LOCAL = {
     }
 };
 
-async function sha256(message) {
-    const msgBuffer = new TextEncoder().encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
 
 // Detect if this is the public GitHub version (has <meta name="portfolio-mode" content="public">)
 const IS_PUBLIC_MODE = document.querySelector('meta[name="portfolio-mode"][content="public"]') !== null;
@@ -545,8 +539,10 @@ if (addSkillBtn) {
     });
 }
 
-// Compile Clean HTML helper (removes admin widgets, edit lines)
-function compileCleanHTML() {
+// Compile Clean HTML helper
+// forPublic=true  → injects portfolio-mode=public meta (for Download HTML / GitHub upload)
+// forPublic=false → clean local save, no meta tag (local index.html stays in local mode)
+function compileCleanHTML(forPublic = false) {
     const clone = document.documentElement.cloneNode(true);
 
     // Remove edit highlights & attributes
@@ -576,6 +572,10 @@ function compileCleanHTML() {
 
     // Clean browser injected extension styles or tags
     clone.querySelectorAll("veepn-lock-screen, script[src*='chrome-extension']").forEach(el => el.remove());
+    // Remove duplicate browser-injected body transition styles
+    clone.querySelectorAll('style').forEach(s => {
+        if (s.textContent.includes('body[unresolved]')) s.remove();
+    });
 
     // Remove delete buttons
     clone.querySelectorAll(".delete-project-btn").forEach(btn => btn.remove());
@@ -583,20 +583,22 @@ function compileCleanHTML() {
     clone.querySelectorAll(".edit-img-overlay").forEach(el => el.remove());
     clone.querySelectorAll(".add-tag-btn").forEach(el => el.remove());
 
-    // Inject public-mode meta tag so GitHub version accepts any password and plays video
-    const headEl = clone.querySelector('head');
-    if (headEl) {
-        // Remove old browser-injected duplicate body-transition styles
-        clone.querySelectorAll('style').forEach(s => {
-            if (s.textContent.includes('body[unresolved]')) s.remove();
-        });
-        const publicMeta = clone.ownerDocument.createElement('meta');
-        publicMeta.setAttribute('name', 'portfolio-mode');
-        publicMeta.setAttribute('content', 'public');
-        headEl.prepend(publicMeta);
+    // Only inject public-mode meta tag for public/GitHub exports (Download HTML)
+    if (forPublic) {
+        const headEl = clone.querySelector('head');
+        if (headEl) {
+            // Remove existing portfolio-mode meta if any
+            clone.querySelectorAll('meta[name="portfolio-mode"]').forEach(m => m.remove());
+            const publicMeta = clone.ownerDocument.createElement('meta');
+            publicMeta.setAttribute('name', 'portfolio-mode');
+            publicMeta.setAttribute('content', 'public');
+            headEl.prepend(publicMeta);
+        }
+    } else {
+        // Ensure no portfolio-mode meta ends up in local saves
+        clone.querySelectorAll('meta[name="portfolio-mode"]').forEach(m => m.remove());
     }
 
-    // Clean scripts values
     return "<!DOCTYPE html>\n" + clone.outerHTML;
 }
 
@@ -625,18 +627,19 @@ if (videoCloseBtn && videoModal && videoIframe) {
 const saveLocalBtn = document.getElementById("save-local-btn");
 if (saveLocalBtn) {
     saveLocalBtn.addEventListener("click", () => {
-        const cleanHTML = compileCleanHTML();
+        // Local cache: no public meta, no video
+        const cleanHTML = compileCleanHTML(false);
         localStorage.setItem("portfolio_cached_html", cleanHTML);
         alert("Portfolio cached locally in browser memory! Note: to save permanently to your files, click 'Save to File' or 'Download HTML'.");
-        playSaveVideo();
     });
 }
 
-// Action button: Download HTML file
+// Action button: Download HTML file (PUBLIC — adds meta tag + video)
 const downloadHtmlBtn = document.getElementById("download-html-btn");
 if (downloadHtmlBtn) {
     downloadHtmlBtn.addEventListener("click", () => {
-        const cleanHTML = compileCleanHTML();
+        // forPublic=true → adds portfolio-mode=public meta tag for GitHub
+        const cleanHTML = compileCleanHTML(true);
         const blob = new Blob([cleanHTML], { type: "text/html;charset=utf-8" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -646,11 +649,10 @@ if (downloadHtmlBtn) {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-        playSaveVideo();
     });
 }
 
-// Action button: Save to Disk (POST to local server API)
+// Action button: Save to Disk (POST to local server API — LOCAL only, no public meta)
 const saveDiskBtn = document.getElementById("save-disk-btn");
 if (saveDiskBtn) {
     saveDiskBtn.addEventListener("click", () => {
@@ -660,7 +662,8 @@ if (saveDiskBtn) {
             return;
         }
 
-        const cleanHTML = compileCleanHTML();
+        // forPublic=false → saves clean local HTML without portfolio-mode meta tag
+        const cleanHTML = compileCleanHTML(false);
 
         fetch("/api/save", {
             method: "POST",
@@ -678,7 +681,6 @@ if (saveDiskBtn) {
             })
             .then(data => {
                 alert(data.message || "Success! Changes written directly to 'index.html' on disk and backup created.");
-                playSaveVideo();
             })
             .catch(err => {
                 alert(err.message);
