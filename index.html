@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed Elhassan | AI & Full-Stack Developer Portfolio</title>
+    <meta name="description"
+        content="Portfolio of Mohamed Elhassan, an AI & Full-Stack Developer building intelligent digital experiences with Machine Learning, Computer Vision, and modern Web Technologies.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohamedonly1.github.io/">
+    <meta property="og:title" content="Mohamed Elhassan | AI & Full-Stack Developer">
+    <meta property="og:description"
+        content="Portfolio of Mohamed Elhassan, an AI & Full-Stack Developer building intelligent digital experiences with Machine Learning, Computer Vision, and modern Web Technologies.">
+    <meta property="og:image" content="https://mohamedonly1.github.io/assets/preview.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://mohamedonly1.github.io/">
+    <meta property="twitter:title" content="Mohamed Elhassan | AI & Full-Stack Developer">
+    <meta property="twitter:description"
+        content="Portfolio of Mohamed Elhassan, an AI & Full-Stack Developer building intelligent digital experiences.">
+    <meta property="twitter:image" content="https://mohamedonly1.github.io/assets/preview.png">
+</head>
+
+<body class="dark-theme">
+    <!-- Interactive Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header & Navigation -->
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="#home" class="logo">
+                <span class="logo-accent">&lt;</span>M. ELHASSAN<span class="logo-accent">/&gt;</span>
+            </a>
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="#about" class="nav-link"><i class="fa-solid fa-user"></i> About</a></li>
+                    <li><a href="#skills" class="nav-link"><i class="fa-solid fa-code"></i> Skills</a></li>
+                    <li><a href="#projects" class="nav-link"><i class="fa-solid fa-laptop-code"></i> Projects</a></li>
+                    <li><a href="#contact" class="nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="badge-container">
+                    <span class="status-badge"><span class="pulse-dot"></span> Available for Work & Projects</span>
+                </div>
+                <h1 class="hero-title">
+                    AI & Full-Stack Developer <br>
+                    Building <span class="gradient-text">Intelligent</span> Experiences
+                </h1>
+                <p class="hero-subtitle">
+                    I specialize in developing applications that combine Artificial Intelligence, Computer Vision, and
+                    Full-Stack Web Development. My passion is transforming complex real-world problems into scalable,
+                    interactive, and production-ready software solutions.
+                </p>
+                <div class="hero-ctas">
+                    <a href="#projects" class="btn btn-primary">View My Work <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="resume.pdf" class="btn btn-secondary" download><i class="fa-solid fa-download"></i>
+                        Download CV</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="blob-wrapper">
+                    <div class="glowing-blob"></div>
+                    <div class="glowing-blob blob-2"></div>
+                </div>
+                <div class="hero-card glass-card">
+                    <div class="card-header">
+                        <span class="card-dot red"></span>
+                        <span class="card-dot yellow"></span>
+                        <span class="card-dot green"></span>
+                        <span class="card-title">comfy_bridge.py</span>
+                    </div>
+                    <div class="card-body">
+                        <pre><code><span class="keyword">import</span> asyncio
+<span class="keyword">import</span> websockets
+<span class="keyword">import</span> json
+
+<span class="comment"># OpenAI API to ComfyUI Bridge</span>
+<span class="keyword">async def</span> <span class="function">send_to_comfy</span>(prompt_data):
+    url = <span class="string">"ws://localhost:8188/ws"</span>
+    <span class="keyword">async with</span> websockets.connect(url) <span class="keyword">as</span> ws:
+        payload = {
+            <span class="string">"prompt"</span>: prompt_data,
+            <span class="string">"client_id"</span>: <span class="string">"local_stack_bridge"</span>
+        }
+        <span class="keyword">await</span> ws.send(json.dumps(payload))
+        <span class="keyword">return await</span> ws.recv()</code></pre>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <a href="#about" aria-label="Scroll to About Section">
+                    <span class="mouse">
+                        <span class="wheel"></span>
+                    </span>
+                </a>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">About Me</span>
+                    <h2 class="section-title">Bridging AI with Thoughtful Engineering</h2>
+                    <div class="header-line"></div>
+                </div>
+                <div class="about-grid">
+                    <div class="about-text">
+                        <p class="lead-text">
+                            I am Mohamed Elhassan, an AI & Full-Stack Developer passionate about designing intelligent
+                            software that delivers practical value.
+                        </p>
+                        <p>
+                            My work focuses on integrating Machine Learning, Computer Vision, and modern web
+                            technologies into seamless user experiences. I enjoy building complete systems—from data
+                            collection and model training to backend APIs and responsive frontend interfaces.
+                        </p>
+                        <p>
+                            I approach every project with an emphasis on clean architecture, maintainability,
+                            performance, and user experience. Currently, my primary interests include Arabic Sign
+                            Language Recognition, automation systems, offline-first local applications (like Ollama +
+                            ComfyUI Stacks), and scalable web platforms.
+                        </p>
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <span class="stat-number gradient-text">3+</span>
+                                <span class="stat-label">Core Projects</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number gradient-text">99%</span>
+                                <span class="stat-label">Model Accuracy</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number gradient-text">14+</span>
+                                <span class="stat-label">Toolkit Techs</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-info-cards" id="about-info-cards">
+                        <!-- Card 1: AI Specialization -->
+                        <div class="info-card glass-card">
+                            <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+                            <h3>AI & Computer Vision</h3>
+                            <p>Developing offline-first intelligent setups (Ollama, Gemma 3), custom API bridges, and
+                                hand-landmark gesture classifiers (MediaPipe, TensorFlow Lite) with up to 99% accuracy.
+                            </p>
+                        </div>
+                        <!-- Card 2: Full Stack Dev -->
+                        <div class="info-card glass-card">
+                            <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                            <h3>Full-Stack & DevOps</h3>
+                            <p>Building clean Flask backends, responsive HTML/CSS/JS layouts, multi-role auth portals,
+                                and local deployments using Arch Linux, Docker Compose, and Nginx Proxy Manager.</p>
+                        </div>
+                        <!-- Card 3: Journey -->
+                        <div class="info-card glass-card">
+                            <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <h3>Education & Journey</h3>
+                            <ul class="info-list-items">
+                                <li><i class="fa-solid fa-university"></i> Computer Education Student, Mansoura
+                                    University (Expected 2027)</li>
+                                <li><i class="fa-solid fa-certificate"></i> Web Development Scholarship (Ministry of
+                                    Communications & Coursera)</li>
+                                <li><i class="fa-solid fa-users"></i> Roller Skating Coach & Assistant Manager (2022 -
+                                    Present)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Technologies</span>
+                    <h2 class="section-title">My Technical Toolkit</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="skills-container">
+                    <!-- Languages -->
+                    <div class="skills-category-wrapper">
+                        <h3 class="category-title"><i class="fa-solid fa-code"></i> Programming Languages</h3>
+                        <div class="skills-grid" id="skills-languages">
+                            <div class="skill-pill">
+                                <i class="fa-brands fa-python" style="color: #3776AB;"></i> Python
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-brands fa-square-js" style="color: #F7DF1E;"></i> JavaScript
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-brands fa-html5" style="color: #E34F26;"></i> HTML5
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-brands fa-css3-alt" style="color: #1572B6;"></i> CSS3
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-brands fa-php" style="color: #777BB4;"></i> PHP
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-database" style="color: #336791;"></i> SQL
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-hashtag" style="color: #239120;"></i> C#
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-play" style="color: #0175C2;"></i> Dart
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI & Computer Vision -->
+                    <div class="skills-category-wrapper">
+                        <h3 class="category-title"><i class="fa-solid fa-brain"></i> Artificial Intelligence</h3>
+                        <div class="skills-grid" id="skills-ai">
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-cubes" style="color: #FF6F00;"></i> TensorFlow
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-cube" style="color: #FF6F00;"></i> TensorFlow Lite
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-eye" style="color: #00ffcc;"></i> OpenCV
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-hand-sparkles" style="color: #ff007f;"></i> MediaPipe
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-calculator" style="color: #013243;"></i> NumPy & Pandas
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-microchip" style="color: #8b5cf6;"></i> Ollama & ComfyUI
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-language" style="color: #4CAF50;"></i> NLTK, spaCy & NLP
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Full-Stack & Systems -->
+                    <div class="skills-category-wrapper">
+                        <h3 class="category-title"><i class="fa-solid fa-server"></i> Full-Stack & Tools</h3>
+                        <div class="skills-grid" id="skills-web">
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-server" style="color: #ffffff;"></i> Flask
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-brands fa-docker" style="color: #2496ED;"></i> Docker
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-brands fa-linux" style="color: #1793D1;"></i> Arch Linux
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-brands fa-git-alt" style="color: #F05032;"></i> Git
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fa-solid fa-shield-halved" style="color: #8b5cf6;"></i> Auth & i18n
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Featured Works</span>
+                    <h2 class="section-title">Showcase of Intelligent Systems</h2>
+                    <div class="header-line"></div>
+                </div>
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Project 1: Ishara -->
+                    <div class="project-card glass-card">
+                        <div class="project-img-wrapper">
+                            <div class="project-img-placeholder gesture-bg">
+                                <div class="hand-skeleton-overlay">
+                                    <div class="joint pt-1"></div>
+                                    <div class="joint pt-2"></div>
+                                    <div class="joint pt-3"></div>
+                                    <div class="joint pt-4"></div>
+                                    <svg class="skeleton-lines" viewBox="0 0 100 100">
+                                        <line x1="20" y1="80" x2="35" y2="60" stroke="#00ffcc" stroke-width="1.5" />
+                                        <line x1="35" y1="60" x2="50" y2="45" stroke="#00ffcc" stroke-width="1.5" />
+                                        <line x1="50" y1="45" x2="65" y2="35" stroke="#00ffcc" stroke-width="1.5" />
+                                        <line x1="50" y1="45" x2="70" y2="55" stroke="#00ffcc" stroke-width="1.5" />
+                                    </svg>
+                                </div>
+                                <span class="tech-overlay-tag">AI & Web Stack</span>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Ishara — Arabic Sign Language Translator</h3>
+                            <p class="project-description">
+                                An end-to-end AI translation system designed to translate Arabic Sign Language into text
+                                and speech, and vice versa. Built with a Flask backend, MediaPipe for 21-hand-landmark
+                                tracking, and TensorFlow Lite for fast, client-side classification achieving <strong>99%
+                                    accuracy</strong> across 29 letters. Includes custom logging and user security.
+                            </p>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>TensorFlow Lite</span>
+                                <span>MediaPipe</span>
+                                <span>Flask</span>
+                                <span>Three.js</span>
+                                <span>HTML/CSS</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/mohamedonly1" target="_blank" class="project-link"><i
+                                        class="fa-brands fa-github"></i> Repository</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Global Trade Portal -->
+                    <div class="project-card glass-card">
+                        <div class="project-img-wrapper">
+                            <div class="project-img-placeholder portal-bg">
+                                <div class="portal-graphics">
+                                    <div class="chart-bar bar-1"></div>
+                                    <div class="chart-bar bar-2"></div>
+                                    <div class="chart-bar bar-3"></div>
+                                </div>
+                                <span class="tech-overlay-tag">Government SaaS</span>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Egyptian Foreign Trade Portal</h3>
+                            <p class="project-description">
+                                A comprehensive, production-ready government SaaS web platform built for exporters,
+                                importers, and investors. Features a fully RTL Arabic interface with 17 custom-designed
+                                pages, a multi-role authentication system, dynamic dashboards, WCAG accessibility
+                                compliance, and thorough backend API integration documentation.
+                            </p>
+                            <div class="project-tags">
+                                <span>HTML5</span>
+                                <span>CSS3</span>
+                                <span>Vanilla JS</span>
+                                <span>RTL Support</span>
+                                <span>WCAG</span>
+                                <span>API Auth</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/mohamedonly1" target="_blank" class="project-link"><i
+                                        class="fa-brands fa-github"></i> Repository</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Local AI Stack -->
+                    <div class="project-card glass-card">
+                        <div class="project-img-wrapper">
+                            <div class="project-img-placeholder logger-bg">
+                                <div class="terminal-simulation">
+                                    <span class="term-line">> connecting to ollama... [OK]</span>
+                                    <span class="term-line">> Gemma 3:4b active</span>
+                                    <span class="term-line">> comfy_bridge.py listening...</span>
+                                </div>
+                                <span class="tech-overlay-tag">Local Stack</span>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <h3 class="project-title">Local AI Stack — Integrated Ollama & ComfyUI</h3>
+                            <p class="project-description">
+                                An integrated environment to run advanced AI models locally on consumer hardware (RTX
+                                3050 6GB). Features a custom Python bridge translating OpenAI-compliant requests into
+                                ComfyUI WebSocket tasks. Successfully handles memory optimizations, Docker-to-Host
+                                networking, and local model inference workflows.
+                            </p>
+                            <div class="project-tags">
+                                <span>Python</span>
+                                <span>Ollama</span>
+                                <span>ComfyUI</span>
+                                <span>WebSockets</span>
+                                <span>Docker</span>
+                                <span>Linux</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/mohamedonly1" target="_blank" class="project-link"><i
+                                        class="fa-brands fa-github"></i> Repository</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Let's Connect</span>
+                    <h2 class="section-title">Start a Conversation</h2>
+                    <div class="header-line"></div>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3 class="contact-subtitle">Get in Touch</h3>
+                        <p>Have an exciting project in mind or want to collaborate on AI-driven web systems? Drop me a
+                            message and let's build something remarkable.</p>
+
+                        <div class="contact-details">
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fa-solid fa-envelope"></i></div>
+                                <div class="detail-content">
+                                    <h4>Email</h4>
+                                    <a href="mailto:mohamedonly1@gmail.com">mohamedonly1@gmail.com</a>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+                                <div class="detail-content">
+                                    <h4>Location</h4>
+                                    <span>Mansoura, Egypt</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <a href="https://github.com/mohamedonly1" target="_blank" class="social-link"
+                                aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/mo-alhassan/" target="_blank" class="social-link"
+                                aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-wrapper glass-card">
+                        <form id="contact-form" class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" required placeholder="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" name="email" required placeholder="john@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" required
+                                    placeholder="Tell me about your project..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Send Message <i
+                                    class="fa-solid fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>
+                    &copy; 2026 Mohamed Elhassan. All rights reserved.
+                    <button id="admin-login-btn" class="admin-login-trigger" aria-label="Admin Login"><i
+                            class="fa-solid fa-lock"></i></button>
+                </p>
+                <div class="footer-links">
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Panel Control Structures -->
+    <div id="admin-modal" class="admin-modal-overlay">
+        <!-- DEV NOTE: Temporary bypass key for local offline testing: dev_override_auth_2026_secured -->
+        <div class="admin-modal glass-card">
+            <h3><i class="fa-solid fa-shield-halved"></i> Control Panel Auth</h3>
+            <p>Please enter the administrator password to enable editing mode.</p>
+            <div class="form-group">
+                <input type="password" id="admin-password" placeholder="Password (default: admin)">
+            </div>
+            <div class="admin-modal-actions">
+                <button id="admin-submit-btn" class="btn btn-primary">Login</button>
+                <button id="admin-close-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-dock" class="admin-dock-wrapper">
+        <div class="admin-dock glass-card">
+            <div class="dock-header">
+                <span class="dock-title"><i class="fa-solid fa-sliders"></i> PORTFOLIO BUILDER</span>
+                <span class="dock-status">EDIT MODE ACTIVE</span>
+            </div>
+            <div class="dock-controls">
+                <button id="add-project-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-circle-plus"></i>
+                    Add Project</button>
+                <button id="add-skill-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-circle-plus"></i> Add
+                    Skill</button>
+                <button id="save-local-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-floppy-disk"></i>
+                    Save Cache</button>
+                <button id="save-disk-btn" class="btn btn-primary btn-sm"><i class="fa-solid fa-hdd"></i> Save to
+                    File</button>
+                <button id="download-html-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-download"></i>
+                    Download HTML</button>
+                <button id="exit-edit-btn" class="btn btn-secondary btn-sm btn-exit"><i
+                        class="fa-solid fa-right-from-bracket"></i> Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+</body>
+
+</html>
