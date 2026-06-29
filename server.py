@@ -23,7 +23,11 @@ def git_push_changes():
             return False, "Git repository is not initialized. Please set up Git remote origin first."
         
         # Add index.html, assets, and styling if updated
-        subprocess.run(["git", "add", "index.html", "style.css", "script.js", "assets/"], capture_output=True, text=True, check=True)
+        files_to_add = ["index.html", "style.css", "script.js"]
+        if os.path.exists("assets") and os.path.isdir("assets"):
+            files_to_add.append("assets/")
+            
+        subprocess.run(["git", "add"] + files_to_add, capture_output=True, text=True, check=True)
         
         # Check if there are staged changes
         status_res = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, check=True)
