@@ -27,21 +27,28 @@ def git_push_changes():
         
         # Check if there are staged changes
         status_res = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, check=True)
-        if not status_res.stdout.strip():
-            return True, "No new changes to commit."
+        has_local_changes = bool(status_res.stdout.strip())
         
-        # Commit
-        commit_msg = f"Auto-update portfolio - {time.strftime('%Y-%m-%d %H:%M:%S')}"
-        subprocess.run(["git", "commit", "-m", commit_msg], capture_output=True, text=True, check=True)
+        if has_local_changes:
+            # Commit local changes first
+            commit_msg = f"Auto-update portfolio - {time.strftime('%Y-%m-%d %H:%M:%S')}"
+            subprocess.run(["git", "commit", "-m", commit_msg], capture_output=True, text=True, check=True)
+        else:
+            # Check if we are ahead of remote
+            status_full = subprocess.run(["git", "status"], capture_output=True, text=True, check=True)
+            if "Your branch is ahead of" not in status_full.stdout:
+                return True, "No new changes to commit or push."
+        
+        # Pull latest changes from remote (using rebase to keep history clean)
+        subprocess.run(["git", "pull", "--rebase"], capture_output=True, text=True, check=True)
         
         # Push to remote branch
-        # Running 'git push' works if upstream is set.
-        push_res = subprocess.run(["git", "push"], capture_output=True, text=True, check=True)
-        return True, "Changes committed and pushed to GitHub successfully!"
+        subprocess.run(["git", "push"], capture_output=True, text=True, check=True)
+        return True, "Changes committed, pulled remote changes, and pushed to GitHub successfully!"
     except subprocess.CalledProcessError as e:
         err_msg = e.stderr or e.stdout or "Command failed"
         print(f"Git command failed: {err_msg}")
-        return False, f"Git push failed: {err_msg.strip()}"
+        return False, f"Git operation failed: {err_msg.strip()}"
     except Exception as e:
         print(f"Git auto-push error: {str(e)}")
         return False, f"Git error: {str(e)}"

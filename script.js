@@ -633,7 +633,7 @@ if (saveDiskBtn) {
                 throw new Error("HTTP POST failed. Make sure you run server.py instead of python -m http.server.");
             })
             .then(data => {
-                alert("Success! Changes written directly to 'index.html' on disk and backup created.");
+                alert(data.message || "Success! Changes written directly to 'index.html' on disk and backup created.");
             })
             .catch(err => {
                 alert(err.message);
