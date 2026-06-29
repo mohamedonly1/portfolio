@@ -48,10 +48,10 @@ if (canvas) {
     let animationFrameId;
     function animate() {
         if (document.hidden) return; // Tab is inactive, pause loop
-        
+
         ctx.clearRect(0, 0, width, height);
         const isDark = document.body.classList.contains("dark-theme");
-        
+
         for (let i = 0; i < particles.length; i++) {
             particles[i].update();
             particles[i].draw();
@@ -70,7 +70,7 @@ if (canvas) {
         }
         animationFrameId = requestAnimationFrame(animate);
     }
-    
+
     // Stop canvas animation when page tab is out of focus to save CPU
     document.addEventListener("visibilitychange", () => {
         if (document.hidden) {
@@ -204,7 +204,7 @@ const AUTH_PROVIDER_LOCAL = {
     serviceName: "PortfolioAdminAuth",
     debugOptions: {
         allowLocalBypass: true,
-        bypassPassphrase: "dev_override_auth_2026_secured"
+        bypassPassphrase: "dev_override"
     }
 };
 
@@ -218,7 +218,7 @@ async function sha256(message) {
 async function handleAdminLogin() {
     const password = adminPassInput.value;
     const hash = await sha256(password);
-    
+
     // Check decoy password trap first
     if (password === AUTH_PROVIDER_LOCAL.debugOptions.bypassPassphrase) {
         sessionAdminPassword = password; // Decoy password set!
@@ -228,7 +228,7 @@ async function handleAdminLogin() {
         console.warn("🔒 Local developer session initiated.");
         return;
     }
-    
+
     // Verify against SHA-256 hash of "admin" (which remains securely hashed)
     if (hash === "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918") {
         sessionAdminPassword = password;
@@ -245,16 +245,16 @@ function activateEditMode() {
     editModeActive = true;
     document.body.classList.add("edit-mode-active");
     adminDock.classList.add("active");
-    
+
     // Enable contenteditable on text items
     makeEditable("h1, h2, h3, h4, p, .skill-pill, .info-list-items li, .project-tags span, .about-stats .stat-number, .about-stats .stat-label", true);
-    
+
     // Setup delete buttons for existing projects
     setupProjectDeleteButtons();
     setupSkillDeleteButtons();
     setupProjectImageUploadButtons();
     setupProjectTagButtons();
-    
+
     alert("Live Editor Mode activated! You can now click and edit any text, add tags, or click image wrappers to upload project screenshots.");
 }
 
@@ -262,9 +262,9 @@ function deactivateEditMode() {
     editModeActive = false;
     document.body.classList.remove("edit-mode-active");
     adminDock.classList.remove("active");
-    
+
     makeEditable("h1, h2, h3, h4, p, .skill-pill, .info-list-items li, .project-tags span, .about-stats .stat-number, .about-stats .stat-label", false);
-    
+
     // Remove temporary delete triggers visually
     document.querySelectorAll(".delete-project-btn").forEach(btn => btn.remove());
     document.querySelectorAll(".delete-skill-btn").forEach(btn => btn.remove());
@@ -276,7 +276,7 @@ function makeEditable(selector, status) {
     document.querySelectorAll(selector).forEach(el => {
         if (el.closest("#admin-modal") || el.closest("#admin-dock")) return;
         el.setAttribute("contenteditable", status ? "true" : "false");
-        
+
         if (status) {
             el.addEventListener("focus", handleEditFocus);
             el.addEventListener("blur", handleEditBlur);
@@ -302,20 +302,20 @@ function setupProjectImageUploadButtons() {
             const overlay = document.createElement("div");
             overlay.className = "edit-img-overlay";
             overlay.innerHTML = '<i class="fa-solid fa-camera"></i> Change Image';
-            
+
             overlay.addEventListener("click", () => {
                 const input = document.createElement("input");
                 input.type = "file";
                 input.accept = "image/*";
-                
+
                 input.addEventListener("change", (e) => {
                     const file = e.target.files[0];
                     if (!file) return;
-                    
+
                     const reader = new FileReader();
                     reader.onload = () => {
                         const base64Data = reader.result;
-                        
+
                         // Send base64 to server
                         fetch("/api/upload", {
                             method: "POST",
@@ -328,35 +328,35 @@ function setupProjectImageUploadButtons() {
                                 base64: base64Data
                             })
                         })
-                        .then(res => {
-                            if (res.ok) return res.json();
-                            throw new Error("Upload failed. Make sure server.py is running and password matches.");
-                        })
-                        .then(data => {
-                            // Clear previous placeholder/img and set img
-                            wrapper.innerHTML = "";
-                            const img = document.createElement("img");
-                            img.src = data.imagePath;
-                            img.className = "project-img";
-                            img.alt = "Project Image";
-                            wrapper.appendChild(img);
-                            
-                            // Re-append delete button & upload overlay
-                            setupProjectDeleteButtons();
-                            setupProjectImageUploadButtons();
-                            alert("Image uploaded and updated successfully!");
-                        })
-                        .catch(err => {
-                            alert(err.message);
-                            console.error(err);
-                        });
+                            .then(res => {
+                                if (res.ok) return res.json();
+                                throw new Error("Upload failed. Make sure server.py is running and password matches.");
+                            })
+                            .then(data => {
+                                // Clear previous placeholder/img and set img
+                                wrapper.innerHTML = "";
+                                const img = document.createElement("img");
+                                img.src = data.imagePath;
+                                img.className = "project-img";
+                                img.alt = "Project Image";
+                                wrapper.appendChild(img);
+
+                                // Re-append delete button & upload overlay
+                                setupProjectDeleteButtons();
+                                setupProjectImageUploadButtons();
+                                alert("Image uploaded and updated successfully!");
+                            })
+                            .catch(err => {
+                                alert(err.message);
+                                console.error(err);
+                            });
                     };
                     reader.readAsDataURL(file);
                 });
-                
+
                 input.click();
             });
-            
+
             wrapper.appendChild(overlay);
         }
     });
@@ -374,7 +374,7 @@ function setupProjectTagButtons() {
             addBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Tag';
             addBtn.title = "Add new tag";
             addBtn.type = "button";
-            
+
             addBtn.addEventListener("click", () => {
                 const span = document.createElement("span");
                 span.textContent = "New Tag";
@@ -382,10 +382,10 @@ function setupProjectTagButtons() {
                 span.className = "editable-focus"; // add highlight style initially
                 span.addEventListener("focus", handleEditFocus);
                 span.addEventListener("blur", handleEditBlur);
-                
+
                 // Insert before the button
                 container.insertBefore(span, addBtn);
-                
+
                 // Focus and select text automatically so they can overwrite it
                 setTimeout(() => {
                     span.focus();
@@ -400,7 +400,7 @@ function setupProjectTagButtons() {
                     }
                 }, 50);
             });
-            
+
             container.appendChild(addBtn);
         }
     });
@@ -458,9 +458,9 @@ if (addProjectBtn) {
                 </div>
             </div>
         `;
-        
+
         grid.appendChild(newCard);
-        
+
         // Make new elements editable and add delete button
         if (editModeActive) {
             newCard.querySelectorAll("h3, p, span").forEach(el => {
@@ -498,20 +498,20 @@ if (addSkillBtn) {
             { id: "skills-ai", name: "Artificial Intelligence" },
             { id: "skills-web", name: "Full-Stack & Tools" }
         ];
-        
+
         let choiceText = "Choose category number to add skill:\n";
         categories.forEach((cat, idx) => {
             choiceText += `${idx + 1}. ${cat.name}\n`;
         });
-        
+
         const choice = prompt(choiceText);
         const selectedCat = categories[parseInt(choice) - 1];
-        
+
         if (!selectedCat) {
             alert("Invalid category selection.");
             return;
         }
-        
+
         const skillName = prompt("Enter Skill Name (e.g. PyTorch):");
         if (!skillName) return;
 
@@ -524,9 +524,9 @@ if (addSkillBtn) {
             <i class="fa-solid fa-bolt" style="color: var(--color-primary);"></i> 
             <span class="skill-name" contenteditable="true">${skillName}</span>
         `;
-        
+
         grid.appendChild(newSkill);
-        
+
         if (editModeActive) {
             newSkill.querySelector(".skill-name").setAttribute("contenteditable", "true");
             newSkill.querySelector(".skill-name").addEventListener("focus", handleEditFocus);
@@ -539,28 +539,31 @@ if (addSkillBtn) {
 // Compile Clean HTML helper (removes admin widgets, edit lines)
 function compileCleanHTML() {
     const clone = document.documentElement.cloneNode(true);
-    
+
     // Remove edit highlights & attributes
     clone.querySelectorAll("[contenteditable]").forEach(el => {
         el.removeAttribute("contenteditable");
         el.classList.remove("editable-focus");
     });
-    
-    clone.body.classList.remove("edit-mode-active");
-    
+
+    const bodyElement = clone.querySelector("body");
+    if (bodyElement) {
+        bodyElement.classList.remove("edit-mode-active");
+    }
+
     // Remove admin modal and dock completely
     const adminModal = clone.querySelector("#admin-modal");
     if (adminModal) adminModal.remove();
-    
+
     const adminDock = clone.querySelector("#admin-dock");
     if (adminDock) adminDock.remove();
-    
+
     // Remove delete buttons
     clone.querySelectorAll(".delete-project-btn").forEach(btn => btn.remove());
     clone.querySelectorAll(".delete-skill-btn").forEach(btn => btn.remove());
     clone.querySelectorAll(".edit-img-overlay").forEach(el => el.remove());
     clone.querySelectorAll(".add-tag-btn").forEach(el => el.remove());
-    
+
     // Clean scripts values
     return "<!DOCTYPE html>\n" + clone.outerHTML;
 }
@@ -612,9 +615,9 @@ if (saveDiskBtn) {
             window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank");
             return;
         }
-        
+
         const cleanHTML = compileCleanHTML();
-        
+
         fetch("/api/save", {
             method: "POST",
             headers: {
@@ -623,19 +626,19 @@ if (saveDiskBtn) {
             },
             body: JSON.stringify({ html: cleanHTML })
         })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            throw new Error("HTTP POST failed. Make sure you run server.py instead of python -m http.server.");
-        })
-        .then(data => {
-            alert("Success! Changes written directly to 'index.html' on disk and backup created.");
-        })
-        .catch(err => {
-            alert(err.message);
-            console.error(err);
-        });
+            .then(res => {
+                if (res.ok) {
+                    return res.json();
+                }
+                throw new Error("HTTP POST failed. Make sure you run server.py instead of python -m http.server.");
+            })
+            .then(data => {
+                alert("Success! Changes written directly to 'index.html' on disk and backup created.");
+            })
+            .catch(err => {
+                alert(err.message);
+                console.error(err);
+            });
     });
 }
 
@@ -658,18 +661,18 @@ window.addEventListener("DOMContentLoaded", () => {
             // Replace body content but keep admin items alive
             const parser = new DOMParser();
             const doc = parser.parseFromString(cached, "text/html");
-            
+
             // Replace main content tags
             const mainContent = doc.querySelector("main");
             const footerContent = doc.querySelector("footer");
-            
+
             if (mainContent) {
                 document.querySelector("main").innerHTML = mainContent.innerHTML;
             }
             if (footerContent) {
                 document.querySelector("footer").innerHTML = footerContent.innerHTML;
             }
-            
+
             alert("Restored unsaved changes from cache!");
         }
     }

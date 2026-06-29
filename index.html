@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
+<html lang="en"><head><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohamed Elhassan | AI & Full-Stack Developer Portfolio</title>
-    <meta name="description"
-        content="Portfolio of Mohamed Elhassan, an AI & Full-Stack Developer building intelligent digital experiences with Machine Learning, Computer Vision, and modern Web Technologies.">
+    <title>Mohamed Elhassan | AI &amp; Full-Stack Developer Portfolio</title>
+    <meta name="description" content="Portfolio of Mohamed Elhassan, an AI &amp; Full-Stack Developer building intelligent digital experiences with Machine Learning, Computer Vision, and modern Web Technologies.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
@@ -20,23 +17,21 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mohamedonly1.github.io/">
-    <meta property="og:title" content="Mohamed Elhassan | AI & Full-Stack Developer">
-    <meta property="og:description"
-        content="Portfolio of Mohamed Elhassan, an AI & Full-Stack Developer building intelligent digital experiences with Machine Learning, Computer Vision, and modern Web Technologies.">
+    <meta property="og:title" content="Mohamed Elhassan | AI &amp; Full-Stack Developer">
+    <meta property="og:description" content="Portfolio of Mohamed Elhassan, an AI &amp; Full-Stack Developer building intelligent digital experiences with Machine Learning, Computer Vision, and modern Web Technologies.">
     <meta property="og:image" content="https://mohamedonly1.github.io/assets/preview.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://mohamedonly1.github.io/">
-    <meta property="twitter:title" content="Mohamed Elhassan | AI & Full-Stack Developer">
-    <meta property="twitter:description"
-        content="Portfolio of Mohamed Elhassan, an AI & Full-Stack Developer building intelligent digital experiences.">
+    <meta property="twitter:title" content="Mohamed Elhassan | AI &amp; Full-Stack Developer">
+    <meta property="twitter:description" content="Portfolio of Mohamed Elhassan, an AI &amp; Full-Stack Developer building intelligent digital experiences.">
     <meta property="twitter:image" content="https://mohamedonly1.github.io/assets/preview.png">
 </head>
 
 <body class="dark-theme">
     <!-- Interactive Background Canvas -->
-    <canvas id="bg-canvas"></canvas>
+    <canvas id="bg-canvas" width="1530" height="935"></canvas>
 
     <!-- Header & Navigation -->
     <header class="site-header">
@@ -46,16 +41,16 @@
             </a>
             <nav class="main-nav" id="main-nav">
                 <ul>
-                    <li><a href="#home" class="nav-link active"><i class="fa-solid fa-house"></i> Home</a></li>
+                    <li><a href="#home" class="nav-link"><i class="fa-solid fa-house"></i> Home</a></li>
                     <li><a href="#about" class="nav-link"><i class="fa-solid fa-user"></i> About</a></li>
                     <li><a href="#skills" class="nav-link"><i class="fa-solid fa-code"></i> Skills</a></li>
-                    <li><a href="#projects" class="nav-link"><i class="fa-solid fa-laptop-code"></i> Projects</a></li>
+                    <li><a href="#projects" class="nav-link active"><i class="fa-solid fa-laptop-code"></i> Projects</a></li>
                     <li><a href="#contact" class="nav-link"><i class="fa-solid fa-paper-plane"></i> Contact</a></li>
                 </ul>
             </nav>
             <div class="nav-actions">
                 <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
-                    <i class="fa-solid fa-moon"></i>
+                    <i class="fa-solid fa-sun"></i>
                 </button>
                 <button class="mobile-menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
                     <span></span>
@@ -72,10 +67,10 @@
         <section id="home" class="hero-section">
             <div class="hero-content">
                 <div class="badge-container">
-                    <span class="status-badge"><span class="pulse-dot"></span> Available for Work & Projects</span>
+                    <span class="status-badge"><span class="pulse-dot"></span> Available for Work &amp; Projects</span>
                 </div>
                 <h1 class="hero-title">
-                    AI & Full-Stack Developer <br>
+                    AI &amp; Full-Stack Developer <br>
                     Building <span class="gradient-text">Intelligent</span> Experiences
                 </h1>
                 <p class="hero-subtitle">
@@ -85,7 +80,7 @@
                 </p>
                 <div class="hero-ctas">
                     <a href="#projects" class="btn btn-primary">View My Work <i class="fa-solid fa-arrow-right"></i></a>
-                    <a href="resume.pdf" class="btn btn-secondary" download><i class="fa-solid fa-download"></i>
+                    <a href="resume.pdf" class="btn btn-secondary" download=""><i class="fa-solid fa-download"></i>
                         Download CV</a>
                 </div>
             </div>
@@ -139,7 +134,7 @@
                 <div class="about-grid">
                     <div class="about-text">
                         <p class="lead-text">
-                            I am Mohamed Elhassan, an AI & Full-Stack Developer passionate about designing intelligent
+                            I am Mohamed Elhassan, an AI &amp; Full-Stack Developer passionate about designing intelligent
                             software that delivers practical value.
                         </p>
                         <p>
@@ -172,7 +167,7 @@
                         <!-- Card 1: AI Specialization -->
                         <div class="info-card glass-card">
                             <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
-                            <h3>AI & Computer Vision</h3>
+                            <h3>AI &amp; Computer Vision</h3>
                             <p>Developing offline-first intelligent setups (Ollama, Gemma 3), custom API bridges, and
                                 hand-landmark gesture classifiers (MediaPipe, TensorFlow Lite) with up to 99% accuracy.
                             </p>
@@ -180,20 +175,20 @@
                         <!-- Card 2: Full Stack Dev -->
                         <div class="info-card glass-card">
                             <div class="card-icon"><i class="fa-solid fa-code"></i></div>
-                            <h3>Full-Stack & DevOps</h3>
+                            <h3>Full-Stack &amp; DevOps</h3>
                             <p>Building clean Flask backends, responsive HTML/CSS/JS layouts, multi-role auth portals,
                                 and local deployments using Arch Linux, Docker Compose, and Nginx Proxy Manager.</p>
                         </div>
                         <!-- Card 3: Journey -->
                         <div class="info-card glass-card">
                             <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                            <h3>Education & Journey</h3>
+                            <h3>Education &amp; Journey</h3>
                             <ul class="info-list-items">
                                 <li><i class="fa-solid fa-university"></i> Computer Education Student, Mansoura
                                     University (Expected 2027)</li>
                                 <li><i class="fa-solid fa-certificate"></i> Web Development Scholarship (Ministry of
-                                    Communications & Coursera)</li>
-                                <li><i class="fa-solid fa-users"></i> Roller Skating Coach & Assistant Manager (2022 -
+                                    Communications &amp; Coursera)</li>
+                                <li><i class="fa-solid fa-users"></i> Roller Skating Coach &amp; Assistant Manager (2022 -
                                     Present)</li>
                             </ul>
                         </div>
@@ -260,20 +255,20 @@
                                 <i class="fa-solid fa-hand-sparkles" style="color: #ff007f;"></i> MediaPipe
                             </div>
                             <div class="skill-pill">
-                                <i class="fa-solid fa-calculator" style="color: #013243;"></i> NumPy & Pandas
+                                <i class="fa-solid fa-calculator" style="color: #013243;"></i> NumPy &amp; Pandas
                             </div>
                             <div class="skill-pill">
-                                <i class="fa-solid fa-microchip" style="color: #8b5cf6;"></i> Ollama & ComfyUI
+                                <i class="fa-solid fa-microchip" style="color: #8b5cf6;"></i> Ollama &amp; ComfyUI
                             </div>
                             <div class="skill-pill">
-                                <i class="fa-solid fa-language" style="color: #4CAF50;"></i> NLTK, spaCy & NLP
+                                <i class="fa-solid fa-language" style="color: #4CAF50;"></i> NLTK, spaCy &amp; NLP
                             </div>
                         </div>
                     </div>
 
                     <!-- Full-Stack & Systems -->
                     <div class="skills-category-wrapper">
-                        <h3 class="category-title"><i class="fa-solid fa-server"></i> Full-Stack & Tools</h3>
+                        <h3 class="category-title"><i class="fa-solid fa-server"></i> Full-Stack &amp; Tools</h3>
                         <div class="skills-grid" id="skills-web">
                             <div class="skill-pill">
                                 <i class="fa-solid fa-server" style="color: #ffffff;"></i> Flask
@@ -288,7 +283,7 @@
                                 <i class="fa-brands fa-git-alt" style="color: #F05032;"></i> Git
                             </div>
                             <div class="skill-pill">
-                                <i class="fa-solid fa-shield-halved" style="color: #8b5cf6;"></i> Auth & i18n
+                                <i class="fa-solid fa-shield-halved" style="color: #8b5cf6;"></i> Auth &amp; i18n
                             </div>
                         </div>
                     </div>
@@ -315,13 +310,13 @@
                                     <div class="joint pt-3"></div>
                                     <div class="joint pt-4"></div>
                                     <svg class="skeleton-lines" viewBox="0 0 100 100">
-                                        <line x1="20" y1="80" x2="35" y2="60" stroke="#00ffcc" stroke-width="1.5" />
-                                        <line x1="35" y1="60" x2="50" y2="45" stroke="#00ffcc" stroke-width="1.5" />
-                                        <line x1="50" y1="45" x2="65" y2="35" stroke="#00ffcc" stroke-width="1.5" />
-                                        <line x1="50" y1="45" x2="70" y2="55" stroke="#00ffcc" stroke-width="1.5" />
+                                        <line x1="20" y1="80" x2="35" y2="60" stroke="#00ffcc" stroke-width="1.5"></line>
+                                        <line x1="35" y1="60" x2="50" y2="45" stroke="#00ffcc" stroke-width="1.5"></line>
+                                        <line x1="50" y1="45" x2="65" y2="35" stroke="#00ffcc" stroke-width="1.5"></line>
+                                        <line x1="50" y1="45" x2="70" y2="55" stroke="#00ffcc" stroke-width="1.5"></line>
                                     </svg>
                                 </div>
-                                <span class="tech-overlay-tag">AI & Web Stack</span>
+                                <span class="tech-overlay-tag">AI &amp; Web Stack</span>
                             </div>
                         </div>
                         <div class="project-info">
@@ -339,10 +334,9 @@
                                 <span>Flask</span>
                                 <span>Three.js</span>
                                 <span>HTML/CSS</span>
-                            </div>
+                            <span class="">New Tag</span></div>
                             <div class="project-links">
-                                <a href="https://github.com/mohamedonly1" target="_blank" class="project-link"><i
-                                        class="fa-brands fa-github"></i> Repository</a>
+                                <a href="https://github.com/mohamedonly1" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository</a>
                             </div>
                         </div>
                     </div>
@@ -376,8 +370,7 @@
                                 <span>API Auth</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/mohamedonly1" target="_blank" class="project-link"><i
-                                        class="fa-brands fa-github"></i> Repository</a>
+                                <a href="https://github.com/mohamedonly1" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository</a>
                             </div>
                         </div>
                     </div>
@@ -387,15 +380,15 @@
                         <div class="project-img-wrapper">
                             <div class="project-img-placeholder logger-bg">
                                 <div class="terminal-simulation">
-                                    <span class="term-line">> connecting to ollama... [OK]</span>
-                                    <span class="term-line">> Gemma 3:4b active</span>
-                                    <span class="term-line">> comfy_bridge.py listening...</span>
+                                    <span class="term-line">&gt; connecting to ollama... [OK]</span>
+                                    <span class="term-line">&gt; Gemma 3:4b active</span>
+                                    <span class="term-line">&gt; comfy_bridge.py listening...</span>
                                 </div>
                                 <span class="tech-overlay-tag">Local Stack</span>
                             </div>
                         </div>
                         <div class="project-info">
-                            <h3 class="project-title">Local AI Stack — Integrated Ollama & ComfyUI</h3>
+                            <h3 class="project-title">Local AI Stack — Integrated Ollama &amp; ComfyUI</h3>
                             <p class="project-description">
                                 An integrated environment to run advanced AI models locally on consumer hardware (RTX
                                 3050 6GB). Features a custom Python bridge translating OpenAI-compliant requests into
@@ -411,8 +404,7 @@
                                 <span>Linux</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/mohamedonly1" target="_blank" class="project-link"><i
-                                        class="fa-brands fa-github"></i> Repository</a>
+                                <a href="https://github.com/mohamedonly1" target="_blank" class="project-link"><i class="fa-brands fa-github"></i> Repository</a>
                             </div>
                         </div>
                     </div>
@@ -439,7 +431,7 @@
                                 <div class="detail-icon"><i class="fa-solid fa-envelope"></i></div>
                                 <div class="detail-content">
                                     <h4>Email</h4>
-                                    <a href="mailto:mohamedonly1@gmail.com">mohamedonly1@gmail.com</a>
+                                    <a href="mailto:mohamedalhasan720@gmail.com">mohamedalhassan720@gmail.com</a>
                                 </div>
                             </div>
                             <div class="detail-item">
@@ -452,10 +444,8 @@
                         </div>
 
                         <div class="social-links">
-                            <a href="https://github.com/mohamedonly1" target="_blank" class="social-link"
-                                aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                            <a href="https://www.linkedin.com/in/mo-alhassan/" target="_blank" class="social-link"
-                                aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="https://github.com/mohamedonly1" target="_blank" class="social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/mo-alhassan/" target="_blank" class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                         </div>
                     </div>
 
@@ -463,19 +453,17 @@
                         <form id="contact-form" class="contact-form">
                             <div class="form-group">
                                 <label for="name">Your Name</label>
-                                <input type="text" id="name" name="name" required placeholder="John Doe">
+                                <input type="text" id="name" name="name" required="" placeholder="John Doe">
                             </div>
                             <div class="form-group">
                                 <label for="email">Your Email</label>
-                                <input type="email" id="email" name="email" required placeholder="john@example.com">
+                                <input type="email" id="email" name="email" required="" placeholder="john@example.com">
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea id="message" name="message" rows="5" required
-                                    placeholder="Tell me about your project..."></textarea>
+                                <textarea id="message" name="message" rows="5" required="" placeholder="Tell me about your project..."></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-block">Send Message <i
-                                    class="fa-solid fa-paper-plane"></i></button>
+                            <button type="submit" class="btn btn-primary btn-block">Send Message <i class="fa-solid fa-paper-plane"></i></button>
                         </form>
                     </div>
                 </div>
@@ -488,9 +476,8 @@
         <div class="container">
             <div class="footer-content">
                 <p>
-                    &copy; 2026 Mohamed Elhassan. All rights reserved.
-                    <button id="admin-login-btn" class="admin-login-trigger" aria-label="Admin Login"><i
-                            class="fa-solid fa-lock"></i></button>
+                    © 2026 Mohamed Elhassan. All rights reserved.
+                    <button id="admin-login-btn" class="admin-login-trigger" aria-label="Admin Login"><i class="fa-solid fa-lock"></i></button>
                 </p>
                 <div class="footer-links">
                     <a href="#home">Home</a>
@@ -503,46 +490,12 @@
     </footer>
 
     <!-- Admin Panel Control Structures -->
-    <div id="admin-modal" class="admin-modal-overlay">
-        <!-- DEV NOTE: Temporary bypass key for local offline testing: dev_override_auth_2026_secured -->
-        <div class="admin-modal glass-card">
-            <h3><i class="fa-solid fa-shield-halved"></i> Control Panel Auth</h3>
-            <p>Please enter the administrator password to enable editing mode.</p>
-            <div class="form-group">
-                <input type="password" id="admin-password" placeholder="Password (default: admin)">
-            </div>
-            <div class="admin-modal-actions">
-                <button id="admin-submit-btn" class="btn btn-primary">Login</button>
-                <button id="admin-close-btn" class="btn btn-secondary">Cancel</button>
-            </div>
-        </div>
-    </div>
+    
 
-    <div id="admin-dock" class="admin-dock-wrapper">
-        <div class="admin-dock glass-card">
-            <div class="dock-header">
-                <span class="dock-title"><i class="fa-solid fa-sliders"></i> PORTFOLIO BUILDER</span>
-                <span class="dock-status">EDIT MODE ACTIVE</span>
-            </div>
-            <div class="dock-controls">
-                <button id="add-project-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-circle-plus"></i>
-                    Add Project</button>
-                <button id="add-skill-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-circle-plus"></i> Add
-                    Skill</button>
-                <button id="save-local-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-floppy-disk"></i>
-                    Save Cache</button>
-                <button id="save-disk-btn" class="btn btn-primary btn-sm"><i class="fa-solid fa-hdd"></i> Save to
-                    File</button>
-                <button id="download-html-btn" class="btn btn-secondary btn-sm"><i class="fa-solid fa-download"></i>
-                    Download HTML</button>
-                <button id="exit-edit-btn" class="btn btn-secondary btn-sm btn-exit"><i
-                        class="fa-solid fa-right-from-bracket"></i> Exit</button>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Custom Script -->
     <script src="script.js"></script>
-</body>
 
-</html>
+
+<veepn-lock-screen><style>@font-face{font-family:FigtreeVF;src:url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2)format("woff2 supports variations"),url(chrome-extension://majdfhpaihoncoakbjgbdhglocklcgno/fonts/FigtreeVF.woff2)format("woff2-variations");font-weight:100 1000;font-display:swap}</style></veepn-lock-screen></body></html>
