@@ -215,13 +215,38 @@ async function sha256(message) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+// Detect if this is the public GitHub version (has <meta name="portfolio-mode" content="public">)
+const IS_PUBLIC_MODE = document.querySelector('meta[name="portfolio-mode"][content="public"]') !== null;
+
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
 async function handleAdminLogin() {
     const password = adminPassInput.value;
-    // Accept any password
-    sessionAdminPassword = password || "bypass_pass";
-    adminOverlay.classList.remove("active");
-    adminPassInput.value = "";
-    activateEditMode();
+
+    // In public mode: accept any password
+    if (IS_PUBLIC_MODE) {
+        sessionAdminPassword = password || "public";
+        adminOverlay.classList.remove("active");
+        adminPassInput.value = "";
+        activateEditMode();
+        return;
+    }
+
+    // Local mode: verify against SHA-256 hash of the real admin password
+    const hash = await sha256(password);
+    if (hash === "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918") {
+        sessionAdminPassword = password;
+        adminOverlay.classList.remove("active");
+        adminPassInput.value = "";
+        activateEditMode();
+    } else {
+        alert("Incorrect administrator password.");
+    }
 }
 
 // Activate/Deactivate Edit Mode
@@ -558,16 +583,31 @@ function compileCleanHTML() {
     clone.querySelectorAll(".edit-img-overlay").forEach(el => el.remove());
     clone.querySelectorAll(".add-tag-btn").forEach(el => el.remove());
 
+    // Inject public-mode meta tag so GitHub version accepts any password and plays video
+    const headEl = clone.querySelector('head');
+    if (headEl) {
+        // Remove old browser-injected duplicate body-transition styles
+        clone.querySelectorAll('style').forEach(s => {
+            if (s.textContent.includes('body[unresolved]')) s.remove();
+        });
+        const publicMeta = clone.ownerDocument.createElement('meta');
+        publicMeta.setAttribute('name', 'portfolio-mode');
+        publicMeta.setAttribute('content', 'public');
+        headEl.prepend(publicMeta);
+    }
+
     // Clean scripts values
     return "<!DOCTYPE html>\n" + clone.outerHTML;
 }
 
-// Video Playback Modal Controls
+// Video Playback Modal Controls (only active in public/GitHub mode)
 const videoModal = document.getElementById("video-modal");
 const videoCloseBtn = document.getElementById("video-close-btn");
 const videoIframe = document.getElementById("video-iframe");
 
 function playSaveVideo() {
+    // Only play video in public mode
+    if (!IS_PUBLIC_MODE) return;
     if (videoModal && videoIframe) {
         videoIframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
         videoModal.classList.add("active");
